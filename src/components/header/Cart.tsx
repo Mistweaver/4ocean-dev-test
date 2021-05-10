@@ -2,7 +2,6 @@ import { Badge, createStyles, IconButton, withStyles } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons"
 import { useAppSelector } from "../../hooks/ReduxHooks";
 
-
 const Cart = () => {
 	const cart = useAppSelector((state) => state.cart);
 
