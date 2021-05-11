@@ -1,11 +1,6 @@
 import { Product } from "./Product";
 
-export class CartSelection {
+export interface CartSelection {
 	product: Product;
 	quantity: number;
-
-	constructor() {
-		this.product = new Product();
-		this.quantity = 0;
-	}
 }

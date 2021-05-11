@@ -4,6 +4,8 @@ import { useAppSelector } from "../../hooks/ReduxHooks";
 
 const Cart = () => {
 	const cart = useAppSelector((state) => state.cart);
+	console.log("Cart: ");
+	console.log(cart);
 
 	let itemQuantity = 0;
 	cart.items.forEach(item => { itemQuantity += item.quantity });

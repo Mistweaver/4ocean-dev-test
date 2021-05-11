@@ -10,10 +10,13 @@ const initialState: CartState = {
 }
 
 function updateCartSelection(cart: CartSelection[], selection: CartSelection) {
+	console.log("Updating cart selection");
+	console.log(selection);
 	// create new cart array
 	let newArray: CartSelection[] = [];
 	// check if the selection already exists
 	let existingSelectionIndex = cart.findIndex(item => item.product.id === selection.product.id);
+	console.log(existingSelectionIndex);
 	// if found, update the existing selection
 	if(existingSelectionIndex !== -1) {
 		// if the selection quantity is zero, just remove it from the array and return a new array
@@ -36,10 +39,10 @@ function updateCartSelection(cart: CartSelection[], selection: CartSelection) {
 		}
 	} else {
 		// otherwise add the new item
-		let newArray = cart.slice();
-		newArray.splice(0, 0, selection);
+		console.log("Adding new item");
+		newArray = [...cart, selection];
 	}
-
+	console.log(newArray);
 	return newArray;
 }
 
