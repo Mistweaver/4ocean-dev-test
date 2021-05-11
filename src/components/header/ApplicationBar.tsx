@@ -1,7 +1,5 @@
-import { AppBar, createStyles, IconButton, makeStyles, Theme, Toolbar, Typography } from "@material-ui/core";
-import { More } from "@material-ui/icons";
-import React, { useState } from "react";
-import Cart from "./Cart";
+import { AppBar, createStyles, makeStyles, Theme, Toolbar, Typography } from "@material-ui/core";
+import Cart from "../cart/Cart";
 import MenuComponent from "./MenuComponent";
 import SearchBar from "./SearchBar";
 

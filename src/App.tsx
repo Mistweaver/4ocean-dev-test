@@ -13,10 +13,12 @@ function App() {
 				<Grid container spacing={2}>
 					<Grid item xs={2}></Grid>
 					<Grid item xs={8}>
-						<Collections />
-						<CollectionRow />
-						<CollectionRow />
-						<CollectionRow />
+						<div style={{display: 'flex', flexDirection: 'column', marginTop: 20}}>
+							<Collections />
+							<CollectionRow />
+							<CollectionRow />
+							<CollectionRow />
+						</div>
 					</Grid>
 					<Grid item xs={2}></Grid>
 				</Grid>

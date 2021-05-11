@@ -1,4 +1,4 @@
-import { Badge, createStyles, IconButton, withStyles } from "@material-ui/core";
+import { Badge, IconButton } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons"
 import { useAppSelector } from "../../hooks/ReduxHooks";
 

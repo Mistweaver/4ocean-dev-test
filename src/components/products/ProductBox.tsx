@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 import React, { useState } from "react";
 import { Product } from "../../objects/Product";
-import ProductPage from "./ProductPage";
+import ProductPage from "./productpage/ProductPage";
 
 interface Props {
 	product: Product;

@@ -8,9 +8,9 @@ export class Product {
 
 	constructor() {
 		this.id = "";
-		this.name = "";
-		this.sku = "";
-		this.description = "";
+		this.name = "Test";
+		this.sku = "#495FJALKF8";
+		this.description = "This is a test description, describing the test product in a testy manner";
 		this.price = 0;
 		this.inventory = 0;
 	}
