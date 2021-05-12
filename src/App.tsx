@@ -10,6 +10,8 @@ function App() {
 
 	
 
+	// using a hook here to try something new
+	// pass empty array to ensure single execution
 	React.useEffect(() => {
 		axios.get('/admin/api/2021-04/collections').then(response => {
 			setData(response.data);

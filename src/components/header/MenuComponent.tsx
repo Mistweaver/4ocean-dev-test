@@ -1,10 +1,8 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@material-ui/core";
+import { Divider, Drawer, IconButton, List, ListItem, ListItemText, ListSubheader } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import React, { useState } from "react";
+import { useState } from "react";
 
-interface Props {
-
-}
+interface Props {}
 
 const MenuComponent = (props: Props) => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -38,7 +36,6 @@ const MenuComponent = (props: Props) => {
 							  Welcome!
 							</ListSubheader>
 						  }
-					
 					>
 						<ListItem button>
 							<ListItemText primary="Best Sellers" />

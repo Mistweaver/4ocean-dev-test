@@ -23,7 +23,6 @@ const useStyles = makeStyles(() =>
         empty: {
             padding: 8,
             textAlign: 'center',
-            cursor: 'pointer',
             borderRadius: 20,
             color: 'grey',
             backgroundColor: 'lightgrey',
@@ -36,7 +35,7 @@ const useStyles = makeStyles(() =>
 
 const AddToCartButton = (props: Props) => {
     const classes = useStyles();
-
+	// render the disabled button styling if the product has zero inventory
     if(props.quantity > 0) {
         return(
             <div className={classes.button} onClick={props.add}>

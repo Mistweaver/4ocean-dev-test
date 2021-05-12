@@ -8,8 +8,9 @@ interface Props {
 }
 
 const ProductBox = (props: Props) => {
+	// when a user clicks on the product box, render the dialog component so they can add the product to their cart
 	const [productPageOpen, setRender ] = useState(false);
-
+	// render the product box
 	return(
 		<>
 			<Card onClick={() => setRender(true)} style={{cursor: 'pointer'}}>

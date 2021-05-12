@@ -1,6 +1,6 @@
 import { Badge, Drawer, IconButton } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons"
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppSelector } from "../../hooks/ReduxHooks";
 import { FormatNumberAsMoney } from "../../utilities/FormatNumberAsMoney";
 import LineItem from "./LineItem";
@@ -10,6 +10,7 @@ const CartComponent = () => {
 
 	// console.log(cart);
 
+	// open the sidebar displaying your cart selections
 	const [menuOpen, setMenuOpen ] = useState(false);
 
 	function openMenu() {
@@ -23,7 +24,8 @@ const CartComponent = () => {
 	let itemQuantity = 0;
 	let subTotal = 0;
 	let cartList: any = [];
-	for (const [key, value] of Object.entries(cart)) {
+	// iterate through the cart state to get your total item quantity, subtotal, and create the React node elements to render the cart list
+	for (const [key, value] of Object.entries(cart)) { // eslint-disable-line @typescript-eslint/no-unused-vars
 		// console.log(`${key}: ${value}`);
 		// cart.items.forEach(item => { itemQuantity += item.quantity });
 		itemQuantity += value.quantity;

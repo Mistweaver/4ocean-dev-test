@@ -17,6 +17,8 @@ const LineItem = (props: Props) => {
 
     const dispatch = useAppDispatch();
 
+	// Use update function to add, subtract, and remove items from cart.
+	// While the function calls may be different, the basic function is the same: get the current cart selection by id and modify it's quantity
     function addQuantity() {
         if(props.quantity < props.currentInventory) {
             let newQuantity = props.quantity + 1;

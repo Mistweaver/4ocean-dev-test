@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Cart } from '../objects/Cart';
 import { CartSelection } from '../objects/CartSelection';
 
+// your cart state will be of type Cart, with product id's used as keys for access
 interface CartState {
     cart: Cart;
 }
@@ -15,6 +16,7 @@ function addToCart(cart: Cart, selection: CartSelection) {
 		let updatedSelection = { ...selection, quantity: newQuantity };
 		return {...cart, [selection.product.id]: updatedSelection };
 	} else {
+		// this product isn't in the cart, just add it as a new entry
 		return { ...cart, [selection.product.id]: selection}
 	}
 }
@@ -27,11 +29,14 @@ function updateQuantity(cart: Cart, id: number, quantity: number) {
   			delete newCart[id];
   			return newCart;
 		} else {
+			// we are not removing the item from the cart, just increasing/decreasing quantity by some amount
 			let selection = cart[id];
 			selection.quantity = quantity;
 			return {...cart, [selection.product.id]: selection };
 		}
 	} else {
+		// product doesn't exist, just return the cart
+		// this case shouldn't be enterable, but if it occurs some error handling should happen
 		return cart;
 	}
 }
@@ -52,6 +57,7 @@ export const cartSlice = createSlice({
 	}
 });
 
+// export the actions
 export const { add, update, empty } = cartSlice.actions;
 
 export default cartSlice.reducer;

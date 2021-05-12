@@ -16,10 +16,12 @@ interface Props {
 
 const ProductPage = (props: Props) => {
 	const [quantity, setQuantity] = useState(1);
+	// responsiveness for when a user clicks add so they know their selection was added to their cart
 	const [added, renderAdded] = useState(false);
 
 	const dispatch = useAppDispatch();
 	
+	// dispatch the item and selected quantity
 	function addToCart() {
 		const { product } = props;
 		dispatch(
@@ -36,8 +38,8 @@ const ProductPage = (props: Props) => {
 				quantity
 			})
 		);
+		// render the selection added jsx
 		renderAdded(true);
-
 	}
 
 	function changeQuantity(event: { target: { value: string }}) {
@@ -52,9 +54,9 @@ const ProductPage = (props: Props) => {
 	}
 
 	function close() {
+		// this doesn't quite work and looks meh, but I hacked this together in 3 minutes
 		props.close();
 		renderAdded(false);
-
 	}
 
 	return(

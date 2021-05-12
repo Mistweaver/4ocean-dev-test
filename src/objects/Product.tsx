@@ -7,6 +7,7 @@ export class Product {
 	price: number;
 	inventory: number;
 
+	// constructor initialized for testing purposes before the mock API was built
 	constructor() {
 		this.id = 0;
 		this.name = "Test";
