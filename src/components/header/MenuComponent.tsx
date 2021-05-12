@@ -24,7 +24,7 @@ const MenuComponent = (props: Props) => {
 			</IconButton>
 			<Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
                     <div style={{
-                        width: 480,
+                        width: 300,
                         height: '100%',
                         backgroundColor: 'transparent',
                         color: 'black',
