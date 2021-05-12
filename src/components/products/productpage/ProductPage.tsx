@@ -4,8 +4,7 @@ import { useAppDispatch } from "../../../hooks/ReduxHooks";
 import { Product } from "../../../objects/Product";
 import AddToCartButton from "./AddToCartButton";
 
-import { updateCart } from '../../../slices/CartSlice';
-import { CartSelection } from "../../../objects/CartSelection";
+import { add } from '../../../slices/CartSlice';
 
 interface Props {
 	product: Product;
@@ -20,10 +19,16 @@ const ProductPage = (props: Props) => {
 	
 	function addToCart() {
 		const { product } = props;
-		console.log("Dispatching");
 		dispatch(
-			updateCart({ 
-				product: { id: product.id, description: product.description, sku: product.sku, price: product.price, name: product.name, inventory: product.inventory},
+			add({ 
+				product: { 
+					id: product.id,
+					description: product.description,
+					sku: product.sku,
+					price: product.price,
+					name: product.name,
+					inventory: product.inventory
+				},
 				quantity
 			})
 		);
@@ -42,7 +47,6 @@ const ProductPage = (props: Props) => {
 
 	return(
 		<Dialog open={props.open} onClose={props.close} maxWidth="md" fullWidth aria-labelledby="product-box">
-        	{/*<DialogTitle id="form-dialog-title"></DialogTitle>*/}
 			<DialogContent>
 				<Grid container spacing={1}>
 					<Grid item xs={8}>

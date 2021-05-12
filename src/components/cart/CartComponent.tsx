@@ -2,13 +2,15 @@ import { Badge, IconButton } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons"
 import { useAppSelector } from "../../hooks/ReduxHooks";
 
-const Cart = () => {
-	const cart = useAppSelector((state) => state.cart);
-	console.log("Cart: ");
-	console.log(cart);
+const CartComponent = () => {
+	const cart = useAppSelector((state) => state.cart.cart);
 
 	let itemQuantity = 0;
-	cart.items.forEach(item => { itemQuantity += item.quantity });
+	for (const [key, value] of Object.entries(cart)) {
+		// console.log(`${key}: ${value}`);
+		// cart.items.forEach(item => { itemQuantity += item.quantity });
+		itemQuantity += value.quantity;
+	}
 
 	return(
 		<div>
@@ -21,4 +23,4 @@ const Cart = () => {
 	)
 }
 
-export default Cart;
+export default CartComponent;

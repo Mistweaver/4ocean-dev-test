@@ -7,7 +7,7 @@ export class Product {
 	inventory: number;
 
 	constructor() {
-		this.id = "";
+		this.id = "12345";
 		this.name = "Test";
 		this.sku = "#495FJALKF8";
 		this.description = "This is a test description, describing the test product in a testy manner";

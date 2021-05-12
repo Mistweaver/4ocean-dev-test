@@ -1,5 +1,5 @@
 import { AppBar, createStyles, makeStyles, Theme, Toolbar, Typography } from "@material-ui/core";
-import Cart from "../cart/Cart";
+import Cart from "../cart/CartComponent";
 import MenuComponent from "./MenuComponent";
 import SearchBar from "./SearchBar";
 

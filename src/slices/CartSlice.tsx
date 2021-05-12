@@ -1,65 +1,58 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Cart } from '../objects/Cart';
 import { CartSelection } from '../objects/CartSelection';
 
 interface CartState {
-	items: CartSelection[];
+    cart: Cart;
 }
 
-const initialState: CartState = {
-	items: []
+const initialState: CartState = { cart: {}}
+
+function addToCart(cart: Cart, selection: CartSelection) {
+	if(cart.hasOwnProperty(selection.product.id)) {
+		// product already in cart, add to existing quantity
+		let newQuantity = cart[selection.product.id].quantity + selection.quantity;
+		let updatedSelection = { ...selection, quantity: newQuantity };
+		return {...cart, [selection.product.id]: updatedSelection };
+	} else {
+		return { ...cart, [selection.product.id]: selection}
+	}
 }
 
-function updateCartSelection(cart: CartSelection[], selection: CartSelection) {
-	console.log("Updating cart selection");
-	console.log(selection);
-	// create new cart array
-	let newArray: CartSelection[] = [];
-	// check if the selection already exists
-	let existingSelectionIndex = cart.findIndex(item => item.product.id === selection.product.id);
-	console.log(existingSelectionIndex);
-	// if found, update the existing selection
-	if(existingSelectionIndex !== -1) {
-		// if the selection quantity is zero, just remove it from the array and return a new array
-		if(selection.quantity === 0) {
-			newArray = cart.slice();
-			newArray.splice(existingSelectionIndex, 1);
+function updateQuantity(cart: Cart, id: string, quantity: number) {
+	if(cart.hasOwnProperty(id)) {
+		if(quantity === 0) {
+			// if the quantity is zero, just remove the property from the cart
+			let newCart = {...cart};
+  			delete newCart[id];
+  			return newCart;
 		} else {
-			// else update the item and quantity
-			newArray = cart.map((item, index) => {
-				if (index !== existingSelectionIndex) {
-					// This isn't the item we care about - keep it as-is
-					return item
-				}
-				// Otherwise, this is the one we want - return an updated item selection
-				return {
-					...item,
-					...selection
-				}
-			});
+			let selection = cart[id];
+			selection.quantity = quantity;
+			return {...cart, [selection.product.id]: selection };
 		}
 	} else {
-		// otherwise add the new item
-		console.log("Adding new item");
-		newArray = [...cart, selection];
+		return cart;
 	}
-	console.log(newArray);
-	return newArray;
 }
 
 export const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		updateCart: (state, action: PayloadAction<CartSelection>) => {
-			state.items = updateCartSelection(state.items, action.payload);
+		add: (state, action: PayloadAction<CartSelection>) => {
+			state.cart = addToCart(state.cart, action.payload);
 		},
-		empty:  (state, action: PayloadAction<{id: string, quantity: number}>) => {
-			state.items = [];
+		update:(state, action: PayloadAction<{id: string, quantity: number}>) => {
+			state.cart = updateQuantity(state.cart, action.payload.id, action.payload.quantity);
+		},
+		empty:  (state, action: PayloadAction<{}>) => {
+			state.cart = {};
 		},
 	}
 });
 
-export const { updateCart, empty } = cartSlice.actions;
+export const { add, update, empty } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
