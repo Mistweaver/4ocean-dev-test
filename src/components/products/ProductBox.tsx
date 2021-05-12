@@ -13,7 +13,9 @@ const ProductBox = (props: Props) => {
 	return(
 		<>
 			<Card onClick={() => setRender(true)} style={{cursor: 'pointer'}}>
-				<div style={{height: 200}} />
+				<div style={{height: 250, padding: 5, display: 'flex'}}>
+					<img style={{margin: 'auto', width: '100%'}} src={props.product.imageSrc} alt="product" />
+				</div>
 			</Card>
 			<ProductPage 
 				product={props.product}

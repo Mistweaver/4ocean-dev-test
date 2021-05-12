@@ -3,10 +3,12 @@ import { Add, Delete, Remove } from "@material-ui/icons"
 import React from "react";
 import { useAppDispatch } from "../../hooks/ReduxHooks";
 import { update } from '../../slices/CartSlice';
+import { FormatNumberAsMoney } from "../../utilities/FormatNumberAsMoney";
 
 interface Props {
-    id: string;
+    id: number;
     name: string;
+    price: number;
     quantity: number;
     currentInventory: number;
 }
@@ -45,6 +47,7 @@ const LineItem = (props: Props) => {
             <div>
                 <div>{props.name}</div>
                 <div>Qty: {props.quantity}</div>
+                <div>Total: <span style={{color: 'red'}}>{FormatNumberAsMoney(props.quantity * props.price)}</span></div>
             </div>
             <div>
                 <div style={{padding: 5, marginBottom: 5, backgroundColor: 'lightgrey', borderRadius: 5, display: 'flex'}}>

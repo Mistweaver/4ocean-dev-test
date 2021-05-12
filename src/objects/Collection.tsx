@@ -1,12 +1,12 @@
 import { Product } from "./Product";
 
 export class Collection {
-	id: string;
+	id: number;
 	name: string;
 	products: Product[];
 
 	constructor() {
-		this.id = "";
+		this.id = 0;
 		this.name = "";
 		this.products = [];
 	}

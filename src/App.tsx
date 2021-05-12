@@ -1,11 +1,27 @@
 import { Grid } from '@material-ui/core';
+import axios from 'axios';
 import React from 'react';
 import './App.css';
 import ApplicationBar from './components/header/ApplicationBar';
 import CollectionRow from './components/products/CollectionRow';
-import Collections from './displays/Collections';
 
 function App() {
+	const [data, setData] = React.useState([]);
+
+	
+
+	React.useEffect(() => {
+		axios.get('/admin/api/2021-04/collections').then(response => {
+			console.log(response);
+			setData(response.data);
+			// return Promise.resolve(response);
+		})
+		.catch((error) => {
+			console.log(error);
+			// return Promise.resolve(error.response);
+		});
+	}, []);
+
 	return (
 		<div>
 			<ApplicationBar />
@@ -14,10 +30,11 @@ function App() {
 					<Grid item xs={2}></Grid>
 					<Grid item xs={8}>
 						<div style={{display: 'flex', flexDirection: 'column', marginTop: 20}}>
-							<Collections />
-							<CollectionRow />
-							<CollectionRow />
-							<CollectionRow />
+							{
+								data.map(collection => (
+									<CollectionRow collection={collection} />
+								))
+							}
 						</div>
 					</Grid>
 					<Grid item xs={2}></Grid>

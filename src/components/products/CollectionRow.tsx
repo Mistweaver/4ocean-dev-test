@@ -4,22 +4,22 @@ import { Product } from "../../objects/Product";
 import ProductBox from "./ProductBox";
 
 interface Props {
-
+    collection: Collection;
 }
 
 const CollectionRow = (props: Props) => {
-    let collection = new Collection();
+    /*let collection = new Collection();
     collection.name="New Collection";
     collection.products.push(new Product());
     collection.products.push(new Product());
-    collection.products.push(new Product());
+    collection.products.push(new Product());*/
 
     return(
         <div style={{paddingTop: 20, borderTop: '1px solid lightgrey', marginBottom: 35}}>
-            <Typography variant="h5" gutterBottom>{collection.name}</Typography>
+            <Typography variant="h5" gutterBottom>{props.collection.name}</Typography>
             <Grid container spacing={2}>
                 {
-                    collection.products.map(product => (
+                    props.collection.products.map(product => (
                         <Grid key={product.id} item xs={4}>
                             <ProductBox product={product} />
                         </Grid>

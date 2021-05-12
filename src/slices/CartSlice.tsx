@@ -19,7 +19,7 @@ function addToCart(cart: Cart, selection: CartSelection) {
 	}
 }
 
-function updateQuantity(cart: Cart, id: string, quantity: number) {
+function updateQuantity(cart: Cart, id: number, quantity: number) {
 	if(cart.hasOwnProperty(id)) {
 		if(quantity === 0) {
 			// if the quantity is zero, just remove the property from the cart
@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
 		add: (state, action: PayloadAction<CartSelection>) => {
 			state.cart = addToCart(state.cart, action.payload);
 		},
-		update:(state, action: PayloadAction<{id: string, quantity: number}>) => {
+		update:(state, action: PayloadAction<{id: number, quantity: number}>) => {
 			state.cart = updateQuantity(state.cart, action.payload.id, action.payload.quantity);
 		},
 		empty:  (state, action: PayloadAction<{}>) => {

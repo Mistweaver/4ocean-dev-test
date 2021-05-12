@@ -1,10 +1,12 @@
-import { Dialog, DialogContent, Grid } from "@material-ui/core";
-import { useState } from "react";
+import { Button, Dialog, DialogContent, Grid } from "@material-ui/core";
+import React, { useState } from "react";
 import { useAppDispatch } from "../../../hooks/ReduxHooks";
 import { Product } from "../../../objects/Product";
 import AddToCartButton from "./AddToCartButton";
 
 import { add } from '../../../slices/CartSlice';
+import { Check } from "@material-ui/icons";
+import { FormatNumberAsMoney } from "../../../utilities/FormatNumberAsMoney";
 
 interface Props {
 	product: Product;
@@ -14,6 +16,7 @@ interface Props {
 
 const ProductPage = (props: Props) => {
 	const [quantity, setQuantity] = useState(1);
+	const [added, renderAdded] = useState(false);
 
 	const dispatch = useAppDispatch();
 	
@@ -26,12 +29,15 @@ const ProductPage = (props: Props) => {
 					description: product.description,
 					sku: product.sku,
 					price: product.price,
+					imageSrc: product.imageSrc,
 					name: product.name,
 					inventory: product.inventory
 				},
 				quantity
 			})
 		);
+		renderAdded(true);
+
 	}
 
 	function changeQuantity(event: { target: { value: string }}) {
@@ -45,13 +51,19 @@ const ProductPage = (props: Props) => {
 		)
 	}
 
+	function close() {
+		props.close();
+		renderAdded(false);
+
+	}
+
 	return(
-		<Dialog open={props.open} onClose={props.close} maxWidth="md" fullWidth aria-labelledby="product-box">
+		<Dialog open={props.open} onClose={close} maxWidth="md" fullWidth aria-labelledby="product-box">
 			<DialogContent>
 				<Grid container spacing={1}>
 					<Grid item xs={8}>
 						<div style={{height: 500, padding: 5, display: 'flex'}}>
-							<img style={{margin: 'auto', width: '100%'}} src="https://img.themanual.com/image/themanual/the-boring-company-flamethrower-v2.jpg" alt="product" />
+							<img style={{margin: 'auto', width: '100%'}} src={props.product.imageSrc} alt="product" />
 						</div>
 					</Grid>
 					<Grid item xs={4}>
@@ -59,10 +71,10 @@ const ProductPage = (props: Props) => {
 							<div style={{fontSize: '18pt', fontWeight: 600}}>{props.product.name}</div>
 							<div style={{fontSize: '9pt', color: 'grey', marginBottom: 10}}>SKU: {props.product.sku}</div>
 							<div style={{marginBottom: 20}}>{props.product.description}</div>
-							<div style={{color: 'red', fontSize: '18pt', fontWeight: 500, marginBottom: 5}}>$24.99</div>
+							<div style={{color: 'red', fontSize: '18pt', fontWeight: 500, marginBottom: 5}}>{FormatNumberAsMoney(props.product.price)}</div>
 							<div style={{marginBottom: 10}}>
 								{
-									props.product.inventory > 0 ? <div style={{color: 'evergreen'}}>In Stock</div> : <div style={{color: 'grey'}}>Out of Stock</div>
+									props.product.inventory > 0 ? <div style={{color: 'green'}}>{props.product.inventory} In Stock</div> : <div style={{color: 'grey'}}>Out of Stock</div>
 								}
 							</div>
 							{
@@ -74,7 +86,20 @@ const ProductPage = (props: Props) => {
 									</select>
 								</div>
 							}
-							<AddToCartButton quantity={props.product.inventory} add={addToCart} />
+							
+							{
+								added ?
+								<div>
+									<div style={{padding: 10, borderRadius: 10, color: 'green', display: 'flex', textAlign: 'center', marginBottom: 10}}>
+										<Check style={{color: 'green', marginTop: 'auto', marginBottom: 'auto', marginRight: 10}} />
+										<div>Added to Cart!</div>
+									</div>
+									<Button variant="outlined" color="secondary" onClick={close}>Close</Button>
+								</div>
+								
+								:
+								<AddToCartButton quantity={props.product.inventory} add={addToCart} />
+							}
 						</div>
 					</Grid>
 				</Grid>
