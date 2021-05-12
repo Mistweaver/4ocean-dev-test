@@ -8,7 +8,7 @@ import LineItem from "./LineItem";
 const CartComponent = () => {
 	const cart = useAppSelector((state) => state.cart.cart);
 
-	console.log(cart);
+	// console.log(cart);
 
 	const [menuOpen, setMenuOpen ] = useState(false);
 
@@ -28,7 +28,6 @@ const CartComponent = () => {
 		// cart.items.forEach(item => { itemQuantity += item.quantity });
 		itemQuantity += value.quantity;
 		subTotal += value.product.price * itemQuantity;
-		console.log("Subtotal: " + subTotal)
 		cartList.push(<LineItem id={value.product.id} name={value.product.name} price={value.product.price} quantity={value.quantity} currentInventory={value.product.inventory} />)
 	}
 

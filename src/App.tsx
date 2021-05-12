@@ -12,12 +12,11 @@ function App() {
 
 	React.useEffect(() => {
 		axios.get('/admin/api/2021-04/collections').then(response => {
-			console.log(response);
 			setData(response.data);
 			// return Promise.resolve(response);
 		})
 		.catch((error) => {
-			console.log(error);
+			console.error(error);
 			// return Promise.resolve(error.response);
 		});
 	}, []);
